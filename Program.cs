@@ -5,7 +5,7 @@ namespace registroPontoConsole
     {
         static void Main(string[] args)
         {
-            new Menu().MenuInicial();
+            new MenuInicial().MenuInicialView();
         }
     }
 }

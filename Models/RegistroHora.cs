@@ -4,16 +4,16 @@ using System.Text;
 
 namespace registroPontoConsole.Models
 {
-    public class RegistroHoras
+    public class RegistroHora
     {
         public DateTimeOffset Date { get; set; }
-        public char Indicador { get; set; }
+        public char Indicador { get; set; } 
 
-        public RegistroHoras()
+        public RegistroHora()
         {
         }
 
-        public RegistroHoras(DateTimeOffset date, char indicador)
+        public RegistroHora(DateTimeOffset date, char indicador)
         {
             Date = date;
             Indicador = indicador;
