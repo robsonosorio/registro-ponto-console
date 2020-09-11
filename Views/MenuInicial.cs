@@ -78,6 +78,11 @@ namespace registroPontoConsole
 
                 Console.Write("\nMatricula: ");
                 int matricula = int.Parse(Console.ReadLine());
+                Console.Write("Data (DD/MM/AAAA): ");
+                string data = Console.ReadLine();
+                Console.Write("Hora (HH:mm): ");
+                string hora = Console.ReadLine();
+                DateTimeOffset date = DateTimeOffset.Parse(data + " " + hora);
 
                 if (!colaboradores.Exists(x => x.Matricula == matricula))
                 {
@@ -89,7 +94,7 @@ namespace registroPontoConsole
 
                     if (colab.VerificarStatus() == true)
                     {
-                        var registro = new RegistroHora(DateTime.Now, 'E');
+                        var registro = new RegistroHora(date, 'E');
                         colab.AddRegistro(registro);
                         colab.AddEntrada(registro.Date);
 
@@ -99,7 +104,7 @@ namespace registroPontoConsole
                     }
                     else
                     {
-                        var registro = new RegistroHora(DateTime.Now, 'S');
+                        var registro = new RegistroHora(date, 'S');
                         colab.AddRegistro(registro);
                         colab.AddSaida(registro.Date);
 
