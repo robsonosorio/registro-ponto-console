@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 
 namespace registroPontoConsole.Models
 {
@@ -32,6 +28,18 @@ namespace registroPontoConsole.Models
         public void AddSaida(DateTimeOffset saida)
         {
             RegistroDeSaidas.Add(saida);
+        }
+
+        public Boolean VerificarStatus()
+        {
+            if (RegistroDeEntradas.Count == RegistroDeSaidas.Count)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public decimal HorasTrabalhadas()

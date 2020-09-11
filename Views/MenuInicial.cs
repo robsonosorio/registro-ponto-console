@@ -78,36 +78,36 @@ namespace registroPontoConsole
 
                 Console.Write("\nMatricula: ");
                 int matricula = int.Parse(Console.ReadLine());
-                Console.Write("Entrada ou Saida (e/s)? ");
-                char status = Char.Parse(Console.ReadLine());
 
                 if (!colaboradores.Exists(x => x.Matricula == matricula))
                 {
                     Console.WriteLine("\n[Matrícula não existe!] Cadastre um novo colaborador!");
                 }
-                else if (!listaIndicadores.Contains(status))
-                {
-                    Console.WriteLine("\n[Erro de indicador!] Tente novamente!");
-                }
                 else
                 {
                     var colab = colaboradores.FirstOrDefault(x => x.Matricula == matricula);
-                    var registro = new RegistroHora(DateTimeOffset.Now, status);
-                    colab.AddRegistro(registro);
 
-                    if (status == 'e')
+                    if (colab.VerificarStatus() == true)
                     {
+                        var registro = new RegistroHora(DateTime.Now, 'E');
+                        colab.AddRegistro(registro);
                         colab.AddEntrada(registro.Date);
+
+                        Console.WriteLine("\n- Registro salvo com sucesso! -\n");
+                        Console.WriteLine("Colaborador: " + colab.Nome);
+                        Console.WriteLine("Entrada : " + registro);
                     }
                     else
                     {
+                        var registro = new RegistroHora(DateTime.Now, 'S');
+                        colab.AddRegistro(registro);
                         colab.AddSaida(registro.Date);
+
+                        Console.WriteLine("\n- Registro salvo com sucesso! -\n");
+                        Console.WriteLine("Colaborador: " + colab.Nome);
+                        Console.WriteLine(registro);
                     }
-                    Console.WriteLine("\n- Registro salvo com sucesso! -\n");
-                    Console.WriteLine("Colaborador: " + colab.Nome);
-                    Console.WriteLine(registro);
                 }
-                Console.ReadKey();
             }
             catch (Exception ex)
             {
@@ -143,7 +143,6 @@ namespace registroPontoConsole
                     Console.WriteLine("\n- Registro salvo com sucesso! -\n");
                     Console.WriteLine(colab);
                 }
-                Console.ReadKey();
             }
             catch (Exception ex)
             {
@@ -168,7 +167,6 @@ namespace registroPontoConsole
                     Console.WriteLine(reg);
                 }
                 Console.WriteLine("Total de horas trabalhadas: " + colab.HorasTrabalhadas());
-                Console.ReadKey();
             }
             catch (Exception ex)
             {
@@ -205,7 +203,6 @@ namespace registroPontoConsole
                         }
                     }
                     Console.WriteLine("[Arquivo salvo com sucesso!] Arquivo salvo na pasta principal desse projeto! ");
-                    Console.ReadKey();
                 }
                 else
                 {
